@@ -1,0 +1,236 @@
+package main
+
+import (
+	"log"
+	"os"
+	"text/template"
+)
+
+type item struct {
+	Name, Descrip string
+	Price         float64
+}
+
+type meal struct {
+	Meal string
+	Item []item
+}
+
+type menu []meal
+
+type restaurant struct {
+	Name string
+	Menu menu
+}
+
+type rests []restaurant
+
+var tpl *template.Template
+
+func init() {
+	tpl = template.Must(template.ParseFiles("tpl.gohtml"))
+}
+
+func main() {
+	r := rests{
+		restaurant{
+			Name: "First Choices",
+			Menu: menu{
+				meal{
+					Meal: "Breakfast",
+					Item: []item{
+						{
+							Name:    "Oatmeal",
+							Descrip: "yum, yum",
+							Price:   4.95,
+						},
+						{
+							Name:    "Cheerios",
+							Descrip: "American eating food traditional now",
+							Price:   3.95,
+						},
+						{
+							Name:    "Orange Juice",
+							Descrip: "Delicious drinking in throat squeezed fresh",
+							Price:   2.95,
+						},
+					},
+				},
+				meal{
+					Meal: "Lunch",
+					Item: []item{
+						{
+							Name:    "Hamburger",
+							Descrip: "Delicious",
+							Price:   6.95,
+						},
+						{
+							Name:    "Cheese Melted Sandwich",
+							Descrip: "Make cheese bread melt grease hot",
+							Price:   3.95,
+						},
+						{
+							Name:    "French Fries",
+							Descrip: "French eat potato fingers",
+							Price:   2.95,
+						},
+					},
+				},
+				meal{
+					Meal: "Dinner",
+					Item: []item{
+						{
+							Name:    "Pasta Bolognese",
+							Descrip: "From Italy delicious eating",
+							Price:   7.95,
+						},
+						{
+							Name:    "Steak",
+							Descrip: "Dead cow grilled bloody",
+							Price:   13.95,
+						},
+						{
+							Name:    "Bistro Potatoe",
+							Descrip: "Bistro bar wood American bacon",
+							Price:   6.95,
+						},
+					},
+				},
+			},
+		},
+		restaurant{
+			Name: "Second Choices",
+			Menu: menu{
+				meal{
+					Meal: "Breakfast",
+					Item: []item{
+						{
+							Name:    "Oatmeal",
+							Descrip: "yum, yum",
+							Price:   4.95,
+						},
+						{
+							Name:    "Cheerios",
+							Descrip: "American eating food traditional now",
+							Price:   3.95,
+						},
+						{
+							Name:    "Orange Juice",
+							Descrip: "Delicious drinking in throat squeezed fresh",
+							Price:   2.95,
+						},
+					},
+				},
+				meal{
+					Meal: "Lunch",
+					Item: []item{
+						{
+							Name:    "Hamburger",
+							Descrip: "Delicious",
+							Price:   6.95,
+						},
+						{
+							Name:    "Cheese Melted Sandwich",
+							Descrip: "Make cheese bread melt grease hot",
+							Price:   3.95,
+						},
+						{
+							Name:    "French Fries",
+							Descrip: "French eat potato fingers",
+							Price:   2.95,
+						},
+					},
+				},
+				meal{
+					Meal: "Dinner",
+					Item: []item{
+						{
+							Name:    "Pasta Bolognese",
+							Descrip: "From Italy delicious eating",
+							Price:   7.95,
+						},
+						{
+							Name:    "Steak",
+							Descrip: "Dead cow grilled bloody",
+							Price:   13.95,
+						},
+						{
+							Name:    "Bistro Potatoe",
+							Descrip: "Bistro bar wood American bacon",
+							Price:   6.95,
+						},
+					},
+				},
+			},
+		},
+	}
+
+	// m := menu{
+	// 	meal{
+	// 		Meal: "Breakfast",
+	// 		Item: []item{
+	// 			{
+	// 				Name:    "Oatmeal",
+	// 				Descrip: "yum, yum",
+	// 				Price:   4.95,
+	// 			},
+	// 			{
+	// 				Name:    "Cheerios",
+	// 				Descrip: "American eating food traditional now",
+	// 				Price:   3.95,
+	// 			},
+	// 			{
+	// 				Name:    "Orange Juice",
+	// 				Descrip: "Delicious drinking in throat squeezed fresh",
+	// 				Price:   2.95,
+	// 			},
+	// 		},
+	// 	},
+	// 	meal{
+	// 		Meal: "Lunch",
+	// 		Item: []item{
+	// 			{
+	// 				Name:    "Hamburger",
+	// 				Descrip: "Delicious",
+	// 				Price:   6.95,
+	// 			},
+	// 			{
+	// 				Name:    "Cheese Melted Sandwich",
+	// 				Descrip: "Make cheese bread melt grease hot",
+	// 				Price:   3.95,
+	// 			},
+	// 			{
+	// 				Name:    "French Fries",
+	// 				Descrip: "French eat potato fingers",
+	// 				Price:   2.95,
+	// 			},
+	// 		},
+	// 	},
+	// 	meal{
+	// 		Meal: "Dinner",
+	// 		Item: []item{
+	// 			{
+	// 				Name:    "Pasta Bolognese",
+	// 				Descrip: "From Italy delicious eating",
+	// 				Price:   7.95,
+	// 			},
+	// 			{
+	// 				Name:    "Steak",
+	// 				Descrip: "Dead cow grilled bloody",
+	// 				Price:   13.95
+	// 			},
+	// 			{
+	// 				Name:    "Bistro Potatoe",
+	// 				Descrip: "Bistro bar wood American bacon",
+	// 				Price:   6.95,
+	// 			},
+	// 		},
+	// 	},
+	// }
+
+	err := tpl.Execute(os.Stdout, r)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+}

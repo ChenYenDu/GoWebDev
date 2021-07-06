@@ -1,0 +1,20 @@
+{{ template "header" }}
+
+<form method="POST" enctype="text/plain">
+    <label for="firstname">FirstName</label>
+    <input type="text" id="firstname" name="first">
+    <label for="lastname">LastName</label>
+    <input type="text" id="lastname" name="last">
+    <label for="subscribe">Subscribe</label>
+    <input type="checkbox" id="subscribe" name="subscribe">
+    <br>
+    <input type="submit">
+</form>
+
+<br>
+
+{{ if . }}
+<h1>BODY: {{.}}</h1>
+{{ end }}
+
+{{ template "footer"}}

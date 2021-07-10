@@ -80,7 +80,7 @@ func signup(w http.ResponseWriter, req *http.Request) {
 		}
 
 		// create session
-		sId, _ := uuid.NewV4()
+		sId := uuid.NewV4()
 		c := &http.Cookie{
 			Name:  "session",
 			Value: sId.String(),
@@ -132,7 +132,7 @@ func login(w http.ResponseWriter, req *http.Request) {
 			return
 		}
 		// create session
-		sID, _ := uuid.NewV4()
+		sID := uuid.NewV4()
 
 		c := &http.Cookie{
 			Name:  "session",
